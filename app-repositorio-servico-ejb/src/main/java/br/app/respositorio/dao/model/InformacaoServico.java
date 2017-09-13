@@ -3,6 +3,7 @@ package br.app.respositorio.dao.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,10 @@ public class InformacaoServico implements Entidade, Serializable {
 	private String envio;
 	private String reposta;
 	private String delegate;
+	private String tokenAutorizacao;
 	private boolean ativo;
 
-	@OneToMany(mappedBy = "informacaoServico")
+	@OneToMany(mappedBy = "informacaoServico",cascade=CascadeType.PERSIST)
 	private List<Servico> servicos;
 
 	public String getEnvio() {
@@ -93,5 +95,15 @@ public class InformacaoServico implements Entidade, Serializable {
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
 	}
+
+	public String getTokenAutorizacao() {
+		return tokenAutorizacao;
+	}
+
+	public void setTokenAutorizacao(String tokenAutorizacao) {
+		this.tokenAutorizacao = tokenAutorizacao;
+	}
+	
+	
 
 }

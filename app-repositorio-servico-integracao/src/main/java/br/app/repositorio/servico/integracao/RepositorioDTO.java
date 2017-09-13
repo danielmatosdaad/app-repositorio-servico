@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import br.app.barramento.integracao.dto.DTO;
+import br.app.barramento.integracao.exception.NegocioException;
 
 public class RepositorioDTO implements IRepositorio, DTO {
 
@@ -37,22 +38,21 @@ public class RepositorioDTO implements IRepositorio, DTO {
 	}
 
 	@Override
-	public RepositorioServico buscar(String name) {
+	public RepositorioServico buscar(String nomeRepositorio) throws NegocioException {
 
-		if (name == null || name.trim().equals("")) {
+		if (nomeRepositorio == null || nomeRepositorio.trim().equals("")) {
 			throw new RuntimeException("Nome Servico invalido");
 		}
 		if (repositorioServico != null) {
 			for (Iterator<RepositorioServicoDTO> iterator = repositorioServico.iterator(); iterator.hasNext();) {
 				RepositorioServicoDTO rp = (RepositorioServicoDTO) iterator.next();
 
-				if (name.equals(rp.getNome())) {
+				if (nomeRepositorio.equals(rp.getNome())) {
 					return rp;
 				}
 			}
 		}
-		System.out.println("Repositorio nao achado");
-		return null;
+		throw new NegocioException("Repositorio nao encontrado: " + nomeRepositorio, new RuntimeException());
 	}
 
 	public boolean isAtivo() {
@@ -64,15 +64,16 @@ public class RepositorioDTO implements IRepositorio, DTO {
 	}
 
 	@Override
-	public InformacaoServico buscarInformacaoServico(String nomeRespositorio, String nomeCatalogo, String nomeAcao,String envio) {
+	public InformacaoServico buscarInformacaoServico(String nomeRespositorio, String nomeCatalogo, String nomeAcao,
+			String envio,String tokenAutorizaca) throws NegocioException {
 		RepositorioServico repositorio = buscar(nomeRespositorio);
 		if (repositorio != null) {
 			CatalogoServico catalogo = repositorio.buscar(nomeCatalogo);
 			if (catalogo != null) {
-				return catalogo.buscarInformacaoServico(nomeAcao,envio);
+				return catalogo.buscarInformacaoServico(nomeAcao, envio,tokenAutorizaca);
 			}
 		}
-		return null;
+		throw new NegocioException("Servico nao encontrado", new RuntimeException());
 	}
 
 }

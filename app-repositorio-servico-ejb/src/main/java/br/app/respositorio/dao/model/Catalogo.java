@@ -3,6 +3,7 @@ package br.app.respositorio.dao.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,10 +31,10 @@ public class Catalogo implements Entidade, Serializable {
 	private Long id;
 
 	private String nome;
-
+	private String nomeArtefatoId;
 	private boolean ativo;
 
-	@OneToMany(mappedBy = "catalogo", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "catalogo", fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
 	private List<Servico> servicos;
 
 	@ManyToOne
@@ -82,6 +83,12 @@ public class Catalogo implements Entidade, Serializable {
 		this.servicos = servicos;
 	}
 
+	public String getNomeArtefatoId() {
+		return nomeArtefatoId;
+	}
 
+	public void setNomeArtefatoId(String nomeArtefatoId) {
+		this.nomeArtefatoId = nomeArtefatoId;
+	}
 
 }

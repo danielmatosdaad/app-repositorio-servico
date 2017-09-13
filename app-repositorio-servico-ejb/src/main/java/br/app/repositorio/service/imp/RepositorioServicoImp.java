@@ -5,10 +5,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
-
 import br.app.barramento.infra.persistencia.service.ServiceDAO;
+import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
+import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
 import br.app.repositorio.dao.facede.RepositorioFacede;
@@ -19,11 +19,11 @@ import br.app.repositorio.servico.integracao.RepositorioDTO;
 import br.app.repositorio.servico.integracao.RepositorioServicoDTO;
 import br.app.respositorio.dao.model.Repositorio;
 
-@Startup
 @Stateless
-@Remote(value = { IServicoRepositorioRemote.class })
-@Local(value = { IServicoRepositorioLocal.class })
-public class RepositorioServicoImp implements IServicoRepositorioRemote, IServicoRepositorioLocal {
+@Remote(value = { IServicoRepositorioRemote.class, IServicoRemoteDAO.class })
+@Local(value = { IServicoRepositorioLocal.class, IServicoLocalDAO.class })
+public class RepositorioServicoImp implements IServicoRepositorioRemote, IServicoRepositorioLocal,
+		IServicoRemoteDAO<RepositorioServicoDTO>, IServicoLocalDAO<RepositorioServicoDTO> {
 
 	/**
 	 * 
@@ -49,7 +49,6 @@ public class RepositorioServicoImp implements IServicoRepositorioRemote, IServic
 
 		return rep;
 	}
-
 
 	@Override
 	public RepositorioServicoDTO adiconar(RepositorioServicoDTO dto) throws InfraEstruturaException, NegocioException {

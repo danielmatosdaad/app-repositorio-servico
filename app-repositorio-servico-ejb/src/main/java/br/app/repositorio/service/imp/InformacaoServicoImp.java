@@ -13,7 +13,7 @@ import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
-import br.app.repositorio.dao.facede.InformacaoSerivcoFacede;
+import br.app.repositorio.dao.facede.InformacaoServicoFacede;
 import br.app.repositorio.servico.integracao.IInformacaoServicoLocal;
 import br.app.repositorio.servico.integracao.IInformacaoServicoRemote;
 import br.app.repositorio.servico.integracao.InformacaoServicoDTO;
@@ -32,7 +32,7 @@ public class InformacaoServicoImp implements IInformacaoServicoRemote, IInformac
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private InformacaoSerivcoFacede informacaoSerivcoFacede;
+	private InformacaoServicoFacede informacaoSerivcoFacede;
 
 	@Override
 	public InformacaoServicoDTO adiconar(InformacaoServicoDTO dto) throws InfraEstruturaException, NegocioException {
@@ -126,11 +126,11 @@ public class InformacaoServicoImp implements IInformacaoServicoRemote, IInformac
 		}
 	}
 
-	public InformacaoSerivcoFacede getInformacaoSerivcoFacede() {
+	public InformacaoServicoFacede getInformacaoSerivcoFacede() {
 		return informacaoSerivcoFacede;
 	}
 
-	public void setInformacaoSerivcoFacede(InformacaoSerivcoFacede informacaoSerivcoFacede) {
+	public void setInformacaoSerivcoFacede(InformacaoServicoFacede informacaoSerivcoFacede) {
 		this.informacaoSerivcoFacede = informacaoSerivcoFacede;
 	}
 

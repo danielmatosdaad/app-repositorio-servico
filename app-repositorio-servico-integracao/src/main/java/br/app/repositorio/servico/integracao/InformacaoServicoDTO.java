@@ -15,6 +15,7 @@ public class InformacaoServicoDTO implements InformacaoServico, DTO {
 	private String envio;
 	private String reposta;
 	private String delegate;
+	private String tokenAutorizacao;
 	private boolean ativo;
 	private List<ServicoDTO> servicos;
 
@@ -97,5 +98,15 @@ public class InformacaoServicoDTO implements InformacaoServico, DTO {
 	public void setServicos(List<ServicoDTO> servicos) {
 		this.servicos = servicos;
 	}
+
+	public String getTokenAutorizacao() {
+		return tokenAutorizacao;
+	}
+
+	public void setTokenAutorizacao(String tokenAutorizacao) {
+		this.tokenAutorizacao = tokenAutorizacao;
+	}
+	
+	
 
 }

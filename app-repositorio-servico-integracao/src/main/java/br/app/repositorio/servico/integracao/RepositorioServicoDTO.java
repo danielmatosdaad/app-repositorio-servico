@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import br.app.barramento.integracao.dto.DTO;
+import br.app.barramento.integracao.exception.NegocioException;
 
 public class RepositorioServicoDTO implements RepositorioServico, DTO {
 
@@ -13,6 +14,11 @@ public class RepositorioServicoDTO implements RepositorioServico, DTO {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
+	private String nomeArtefatoId;
+	private String loginServidor;
+	private String senhaServidor;
+	private String ipServidor;
+	private String portaServidor;
 	private boolean ativo;
 	private List<CatalogoServicoDTO> catalogo;
 
@@ -28,23 +34,23 @@ public class RepositorioServicoDTO implements RepositorioServico, DTO {
 	}
 
 	@Override
-	public CatalogoServico buscar(String name) {
+	public CatalogoServico buscar(String nameCatalogo) throws NegocioException {
 
-		if (name == null || name.trim().equals("")) {
-			throw new RuntimeException("Nome Servico invalido");
+		if (nameCatalogo == null || nameCatalogo.trim().equals("")) {
+			throw new NegocioException("Nome Servico invalido", new RuntimeException());
 		}
 		if (catalogo != null) {
 
 			for (Iterator<CatalogoServicoDTO> iterator = catalogo.iterator(); iterator.hasNext();) {
 				CatalogoServicoDTO catalaogo = (CatalogoServicoDTO) iterator.next();
 
-				if (name.equals(catalaogo.getNome())) {
+				if (nameCatalogo.equals(catalaogo.getNome())) {
 					return catalaogo;
 				}
 			}
 		}
 
-		return null;
+		throw new NegocioException("Catalogo nao encontrado: " + nameCatalogo, new RuntimeException());
 	}
 
 	public String getNome() {
@@ -69,6 +75,46 @@ public class RepositorioServicoDTO implements RepositorioServico, DTO {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getNomeArtefatoId() {
+		return nomeArtefatoId;
+	}
+
+	public void setNomeArtefatoId(String nomeArtefatoId) {
+		this.nomeArtefatoId = nomeArtefatoId;
+	}
+
+	public String getLoginServidor() {
+		return loginServidor;
+	}
+
+	public void setLoginServidor(String loginServidor) {
+		this.loginServidor = loginServidor;
+	}
+
+	public String getSenhaServidor() {
+		return senhaServidor;
+	}
+
+	public void setSenhaServidor(String senhaServidor) {
+		this.senhaServidor = senhaServidor;
+	}
+
+	public String getIpServidor() {
+		return ipServidor;
+	}
+
+	public void setIpServidor(String ipServidor) {
+		this.ipServidor = ipServidor;
+	}
+
+	public String getPortaServidor() {
+		return portaServidor;
+	}
+
+	public void setPortaServidor(String portaServidor) {
+		this.portaServidor = portaServidor;
 	}
 
 }

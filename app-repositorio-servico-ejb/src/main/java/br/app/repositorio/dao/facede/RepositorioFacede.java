@@ -26,7 +26,7 @@ public class RepositorioFacede extends AbstractFacade<Repositorio> {
 	}
 	
 
-	@PersistenceContext(unitName = "persistencia-contexto-respositorio")
+	@PersistenceContext(unitName = "app-contexto-respositorio")
 	private EntityManager em;
 
 	protected EntityManager getEntityManager() {

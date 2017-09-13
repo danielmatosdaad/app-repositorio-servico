@@ -26,7 +26,7 @@ public class CatalogoFacede extends AbstractFacade<Catalogo> {
 	}
 	
 
-	@PersistenceContext(unitName = "persistencia-contexto-respositorio")
+	@PersistenceContext(unitName = "app-contexto-respositorio")
 	private EntityManager em;
 
 	protected EntityManager getEntityManager() {

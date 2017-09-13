@@ -15,18 +15,18 @@ import br.app.respositorio.dao.model.InformacaoServico;
 
 
 @Stateless
-public class InformacaoSerivcoFacede extends AbstractFacade<InformacaoServico> {
+public class InformacaoServicoFacede extends AbstractFacade<InformacaoServico> {
 
-	public InformacaoSerivcoFacede() {
+	public InformacaoServicoFacede() {
 		super(InformacaoServico.class);
 	}
 
-	public InformacaoSerivcoFacede(Class<InformacaoServico> entityClass) {
+	public InformacaoServicoFacede(Class<InformacaoServico> entityClass) {
 		super(entityClass);
 	}
 	
 
-	@PersistenceContext(unitName = "persistencia-contexto-respositorio")
+	@PersistenceContext(unitName = "app-contexto-respositorio")
 	private EntityManager em;
 
 	protected EntityManager getEntityManager() {

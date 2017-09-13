@@ -2,6 +2,7 @@ package br.app.respositorio.dao.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,11 +25,11 @@ public class Servico implements Entidade, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private AcaoServico acaoServico;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private InformacaoServico informacaoServico;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Catalogo catalogo;
 
 	private boolean ativo;

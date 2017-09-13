@@ -11,7 +11,8 @@ public interface InformacaoServico {
 
 	public String getEnvio();
 	
-	public boolean isAtivo();
+	public String getTokenAutorizacao();
 	
+	public boolean isAtivo();
 
 }

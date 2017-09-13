@@ -3,6 +3,7 @@ package br.app.respositorio.dao.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,15 @@ public class Repositorio implements Entidade, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String nome;
-
+	private String nomeArtefatoId;
+	private String loginServidor;
+	private String senhaServidor;
+	private String ipServidor;
+	private String portaServidor;
 	private boolean ativo;
 
-	@OneToMany(mappedBy = "repositorio", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "repositorio", fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
 	private List<Catalogo> catalogo;
 
 	public List<Catalogo> getCatalogo() {
@@ -68,6 +72,46 @@ public class Repositorio implements Entidade, Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getLoginServidor() {
+		return loginServidor;
+	}
+
+	public void setLoginServidor(String loginServidor) {
+		this.loginServidor = loginServidor;
+	}
+
+	public String getSenhaServidor() {
+		return senhaServidor;
+	}
+
+	public void setSenhaServidor(String senhaServidor) {
+		this.senhaServidor = senhaServidor;
+	}
+
+	public String getIpServidor() {
+		return ipServidor;
+	}
+
+	public void setIpServidor(String ipServidor) {
+		this.ipServidor = ipServidor;
+	}
+
+	public String getPortaServidor() {
+		return portaServidor;
+	}
+
+	public void setPortaServidor(String portaServidor) {
+		this.portaServidor = portaServidor;
+	}
+
+	public String getNomeArtefatoId() {
+		return nomeArtefatoId;
+	}
+
+	public void setNomeArtefatoId(String nomeArtefatoId) {
+		this.nomeArtefatoId = nomeArtefatoId;
 	}
 
 }

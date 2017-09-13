@@ -1,4 +1,4 @@
-package br.app.catalago.api;
+package br.app.repositorio.api;
 
 
 import br.app.barramento.integracao.dto.EnvioDTO;
