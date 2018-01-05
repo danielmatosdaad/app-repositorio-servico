@@ -13,7 +13,6 @@ import javax.persistence.criteria.Root;
 import br.app.barramento.infra.persistencia.dao.AbstractFacade;
 import br.app.respositorio.dao.model.Servico;
 
-
 @Stateless
 public class ServicoFacede extends AbstractFacade<Servico> {
 
@@ -24,7 +23,6 @@ public class ServicoFacede extends AbstractFacade<Servico> {
 	public ServicoFacede(Class<Servico> entityClass) {
 		super(entityClass);
 	}
-	
 
 	@PersistenceContext(unitName = "app-contexto-respositorio")
 	private EntityManager em;
@@ -33,19 +31,17 @@ public class ServicoFacede extends AbstractFacade<Servico> {
 		return em;
 	}
 
-
 	public List<Servico> buscarTodos() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Servico> criteria = cb.createQuery(Servico.class);
 		Root<Servico> root = criteria.from(Servico.class);
 		CriteriaQuery<Servico> todos = criteria.select(root);
 		TypedQuery<Servico> allQuery = em.createQuery(todos);
-		
+
 		List<Servico> resultado = allQuery.getResultList();
-		
+
 		System.out.println("Quantidade todos? " + resultado.size());
 		return resultado;
 	}
 
 }
-	

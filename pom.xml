@@ -34,7 +34,7 @@
         <module>app-repositorio-servico-ejb</module>
         <module>app-repositorio-servico-ear</module>
         <module>app-repositorio-servico-api</module>
-        
+        <module>app-repositorio-servico-web</module>
         <module>app-repositorio-servico-integracao</module>
   </modules>
 
@@ -76,6 +76,16 @@
                 <artifactId>app-repositorio-servico-ejb</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
+            </dependency>
+            
+                <!-- Define the version of the WAR so that we don't need to repeat 
+                ourselves in every module -->
+            <dependency>
+                <groupId>br.com.app.smart.business</groupId>
+                <artifactId>app-repositorio-servico-web</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+                <scope>compile</scope>
             </dependency>
             
 

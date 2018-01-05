@@ -19,7 +19,7 @@
 			source, this example data source is just for development and testing! -->
 		<!-- The datasource is deployed as <EAR>/META-INF/app-smart-business-ds.xml, 
 			you can find it in the source at ear/src/main/application/META-INF/app-smart-business-ds.xml -->
-		<jta-data-source>java:jboss/datasources/app-catalogo-servico-ds</jta-data-source>
+		<jta-data-source>java:jboss/datasources/app-respositorio-servico-ds</jta-data-source>
 		<class>br.app.respositorio.dao.model.Repositorio</class>
 		<class>br.app.respositorio.dao.model.Catalogo</class>
 		<class>br.app.respositorio.dao.model.Servico</class>

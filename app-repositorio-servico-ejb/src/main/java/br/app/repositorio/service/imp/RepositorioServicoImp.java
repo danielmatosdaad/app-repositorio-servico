@@ -1,18 +1,23 @@
 package br.app.repositorio.service.imp;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+
+import br.app.barramento.infra.persistencia.conversores.Conversor;
 import br.app.barramento.infra.persistencia.service.ServiceDAO;
-import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
-import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
+import br.app.barramento.integracao.dto.FiltroDTO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
 import br.app.repositorio.dao.facede.RepositorioFacede;
 import br.app.repositorio.servico.integracao.IRepositorio;
+import br.app.repositorio.servico.integracao.IServicoRepositorio;
 import br.app.repositorio.servico.integracao.IServicoRepositorioLocal;
 import br.app.repositorio.servico.integracao.IServicoRepositorioRemote;
 import br.app.repositorio.servico.integracao.RepositorioDTO;
@@ -20,10 +25,9 @@ import br.app.repositorio.servico.integracao.RepositorioServicoDTO;
 import br.app.respositorio.dao.model.Repositorio;
 
 @Stateless
-@Remote(value = { IServicoRepositorioRemote.class, IServicoRemoteDAO.class })
-@Local(value = { IServicoRepositorioLocal.class, IServicoLocalDAO.class })
-public class RepositorioServicoImp implements IServicoRepositorioRemote, IServicoRepositorioLocal,
-		IServicoRemoteDAO<RepositorioServicoDTO>, IServicoLocalDAO<RepositorioServicoDTO> {
+@Local(value = { IServicoRepositorioLocal.class })
+@Remote(value = { IServicoRepositorioRemote.class })
+public class RepositorioServicoImp implements IServicoRepositorioLocal, IServicoRepositorioRemote, Serializable {
 
 	/**
 	 * 
@@ -32,6 +36,11 @@ public class RepositorioServicoImp implements IServicoRepositorioRemote, IServic
 
 	@EJB
 	private RepositorioFacede repositorioFacade;
+
+	@PostConstruct
+	public void init() {
+		System.out.println(RepositorioServicoImp.class.getName() + " Call");
+	}
 
 	@Override
 	public IRepositorio getRespositorio() throws InfraEstruturaException, NegocioException {
@@ -148,6 +157,29 @@ public class RepositorioServicoImp implements IServicoRepositorioRemote, IServic
 
 	public void setRepositorioFacade(RepositorioFacede repositorioFacade) {
 		this.repositorioFacade = repositorioFacade;
+	}
+
+	@Override
+	public List<RepositorioServicoDTO> filtrar(FiltroDTO filtro) throws InfraEstruturaException, NegocioException {
+		// TODO Auto-generated method stub
+
+		List<Repositorio> repositorios = this.repositorioFacade.filtrar(filtro.getCampoValores(),
+				filtro.getTipoOperacao());
+		List<RepositorioServicoDTO> listaDTO = new ArrayList<RepositorioServicoDTO>();
+
+		for (Repositorio e : repositorios) {
+			RepositorioServicoDTO dto = Conversor.converter(e, RepositorioServicoDTO.class);
+			listaDTO.add(dto);
+		}
+
+		return listaDTO;
+	}
+
+	@Override
+	public List<RepositorioServicoDTO> listaComFiltro(FiltroDTO filtroDTO, int results, int page)
+			throws InfraEstruturaException, NegocioException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

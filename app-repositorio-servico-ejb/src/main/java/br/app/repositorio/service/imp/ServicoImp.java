@@ -8,9 +8,11 @@ import javax.ejb.Remote;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
 
+import br.app.barramento.infra.persistencia.dao.IFacedeDAO;
 import br.app.barramento.infra.persistencia.service.ServiceDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
+import br.app.barramento.integracao.dto.FiltroDTO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
 import br.app.repositorio.dao.facede.ServicoFacede;
@@ -34,6 +36,7 @@ public class ServicoImp
 	@EJB
 	private ServicoFacede servicoFacede;
 
+	
 	@Override
 	public ServicoDTO adiconar(ServicoDTO dto) throws InfraEstruturaException, NegocioException {
 		try {
@@ -123,12 +126,19 @@ public class ServicoImp
 		}
 	}
 
-	public ServicoFacede getServicoFacede() {
+	public IFacedeDAO getServicoFacede() {
 		return servicoFacede;
 	}
 
 	public void setServicoFacede(ServicoFacede servicoFacede) {
 		this.servicoFacede = servicoFacede;
+	}
+
+	@Override
+	public List<ServicoDTO> listaComFiltro(FiltroDTO filtroDTO, int results, int page)
+			throws InfraEstruturaException, NegocioException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

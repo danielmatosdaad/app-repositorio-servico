@@ -8,9 +8,11 @@ import javax.ejb.Remote;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
 
+import br.app.barramento.infra.persistencia.dao.IFacedeDAO;
 import br.app.barramento.infra.persistencia.service.ServiceDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
+import br.app.barramento.integracao.dto.FiltroDTO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
 import br.app.repositorio.dao.facede.InformacaoServicoFacede;
@@ -126,12 +128,19 @@ public class InformacaoServicoImp implements IInformacaoServicoRemote, IInformac
 		}
 	}
 
-	public InformacaoServicoFacede getInformacaoSerivcoFacede() {
+	public IFacedeDAO getInformacaoSerivcoFacede() {
 		return informacaoSerivcoFacede;
 	}
 
 	public void setInformacaoSerivcoFacede(InformacaoServicoFacede informacaoSerivcoFacede) {
 		this.informacaoSerivcoFacede = informacaoSerivcoFacede;
+	}
+
+	@Override
+	public List<InformacaoServicoDTO> listaComFiltro(FiltroDTO filtroDTO, int results, int page)
+			throws InfraEstruturaException, NegocioException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import br.app.barramento.infra.persistencia.service.ServiceDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoLocalDAO;
 import br.app.barramento.integracao.dao.interfaces.IServicoRemoteDAO;
+import br.app.barramento.integracao.dto.FiltroDTO;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
 import br.app.repositorio.dao.facede.CatalogoFacede;
@@ -23,8 +24,8 @@ import br.app.respositorio.dao.model.Catalogo;
 
 @Startup
 @Stateless
-@Remote(value = { IServicoRepositorioRemote.class, IServicoRemoteDAO.class })
-@Local(value = { IServicoRepositorioLocal.class, IServicoLocalDAO.class })
+@Remote(value = { IServicoCatalogoRemote.class, IServicoRemoteDAO.class })
+@Local(value = { IServicoCatalogoLocal.class, IServicoLocalDAO.class })
 public class CatalogoServicoImp implements IServicoCatalogoRemote, IServicoCatalogoLocal,
 		IServicoLocalDAO<CatalogoServicoDTO>, IServicoRemoteDAO<CatalogoServicoDTO> {
 
@@ -133,6 +134,12 @@ public class CatalogoServicoImp implements IServicoCatalogoRemote, IServicoCatal
 
 	public void setCatalogoFacade(CatalogoFacede catalogoFacade) {
 		this.catalogoFacade = catalogoFacade;
+	}
+
+	@Override
+	public List<CatalogoServicoDTO> listaComFiltro(FiltroDTO filtroDTO, int results, int page)
+			throws InfraEstruturaException, NegocioException {
+		return null;
 	}
 
 }

@@ -35,13 +35,6 @@
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.wildfly</groupId>
-			<artifactId>wildfly-ejb-client-bom</artifactId>
-			<version>8.2.0.Final</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
 		<!-- Declare the APIs we depend on and need for compilation. All of them 
 			are provided by JBoss WildFly -->
 
